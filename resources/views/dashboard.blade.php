@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <span>Jumlah Kategori</span>
-                        <h3 class="card-title text-nowrap mb-1">{{ $categories }}</h3>
+                        <h3 class="card-title text-nowrap mb-1">{{ $kategori }}</h3>
 
                     </div>
                 </div>

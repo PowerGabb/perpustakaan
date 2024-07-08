@@ -64,7 +64,8 @@
                                             <p class="text-danger pt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 col-md-6">
+                                    
+                                    <div class="mb-3 col-md-12">
                                         <label for="organization" class="form-label">Status</label>
                                         @if (Auth::user()->role == 'admin')
                                             <input type="text" class="form-control" id="organization" name="role" value="{{ $profile->role }}">

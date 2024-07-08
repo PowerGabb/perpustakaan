@@ -17,9 +17,13 @@
             @csrf
             @method('PUT')
             <div class="row">
-              <div class="mb-3 col-md-6">
+              <div class="mb-3 col-md-12">
                 <label for="firstName" class="form-label">Nama Lengkap</label>
                 <input class="form-control" type="text" id="firstName" name="name" value="{{$user->name}}">
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="firstName" class="form-label">Phone</label>
+                <input class="form-control" type="text" id="firstName" name="phone" value="{{$user->phone}}">
               </div>
               <div class="mb-3 col-md-6">
                 <label for="lastName" class="form-label">Email</label>

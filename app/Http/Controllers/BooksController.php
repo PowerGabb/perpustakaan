@@ -17,41 +17,33 @@ class BooksController extends Controller
 {
     public function index()
     {
-        $data = Book::with('noRak')->get();
 
+        $data = Book::all();
         return view('books.index', compact('data'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $data = Book::with('noRak')->where('title', 'like', '%' . $request->search . '%')->get();
         return view('books.index', compact('data'));
     }
 
-    
+
 
     public function create()
     {
 
-        $authors = Author::all();
-        $publishers = Publisher::all();
-        $raks = NoRak::all();
-        $categories = Categories::all();
-        return view('books.create', compact('authors', 'raks', 'publishers', 'categories'));
+
+        return view('books.create');
     }
 
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $validate = $request->validate([
             'title' => 'required',
             'book_code' => 'required|unique:books,book_code',
-            'author_id' => 'required',
-            'categories' => 'required',
-            'publisher_id' => 'required',
-            'description' => 'max:210',
-            'rak_id' => 'required',
-            'jumlah' => 'required',
-            'cover' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'publication_year' => 'required',
         ]);
 
 
@@ -59,24 +51,31 @@ class BooksController extends Controller
             $image = $request->file('cover');
             $imgname = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/cover', $imgname);
-        }else
-        {
+        } else {
             $imgname = null;
         }
 
         $data = Book::create([
             'title' => $request->title,
+            'no_inventaris' => $request->no_inventaris,
             'book_code' => $request->book_code,
-            'author_id' => $request->author_id,
-            'publisher_id' => $request->publisher_id,
-            'rak_id' => $request->rak_id,
-            'cover' => $imgname,
+            'pengarang' => $request->pengarang,
+            'penerbit' => $request->penerbit,
+            'kota_terbit' => $request->kota_terbit,
+            'edisi' => $request->edisi,
             'publication_year' => $request->publication_year,
+            'rak' => $request->rak,
+            'jumlah_halaman' => $request->jumlah_halaman,
+            'tinggi_buku' => $request->tinggi_buku,
+            'isbn' => $request->isbn,
+            'kategori' => $request->kategori,
+            'sumber' => $request->sumber,
+            'harga' => $request->harga,
+            'keterangan' => $request->keterangan,
+            'cover' => $imgname,
             'description' => $request->description,
             'jumlah' => $request->jumlah,
         ]);
-
-        $data->categories()->attach($request->categories);
 
         return redirect()->route('books.index')->with('success', 'Data created successfully');
     }
@@ -86,24 +85,11 @@ class BooksController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        $authors = Author::all();
-        $publishers = Publisher::all();
-        $raks = NoRak::all();
-        $categories = Categories::all();
-        return view('books.edit', compact('book', 'authors', 'raks', 'publishers', 'categories'));
+        return view('books.edit', compact('book'));
     }
 
     public function update(Request $request, $id)
     {
-        $validate = $request->validate([
-            'title' => 'required',
-            'author_id' => 'required',
-            'publisher_id' => 'required',
-            'rak_id' => 'required',
-            'jumlah' => 'required',
-            'cover' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'publication_year' => 'required',
-        ]);
 
         $book = Book::findOrFail($id);
 
@@ -114,24 +100,36 @@ class BooksController extends Controller
             $image = $request->file('cover');
             $imgname = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/cover', $imgname);
-            $book->cover = $imgname;
+        } else {
+            $imgname = $book->cover;
         }
 
-        $book->title = $request->title;
-        $book->author_id = $request->author_id;
-        $book->book_code = $request->book_code;
-        $book->publisher_id = $request->publisher_id;
-        $book->rak_id = $request->rak_id;
-        $book->publication_year = $request->publication_year;
-        $book->description = $request->description;
-        $book->jumlah = $request->jumlah;
-        $book->save();
-
-        // Synchronize kategori
-        $book->categories()->sync($request->categories);
+        $book->update([
+            'title' => $request->title,
+            'no_inventaris' => $request->no_inventaris,
+            'book_code' => $request->book_code,
+            'pengarang' => $request->pengarang,
+            'penerbit' => $request->penerbit,
+            'kota_terbit' => $request->kota_terbit,
+            'edisi' => $request->edisi,
+            'publication_year' => $request->publication_year,
+            'rak' => $request->rak,
+            'jumlah_halaman' => $request->jumlah_halaman,
+            'tinggi_buku' => $request->tinggi_buku,
+            'isbn' => $request->isbn,
+            'kategori' => $request->kategori,
+            'sumber' => $request->sumber,
+            'harga' => $request->harga,
+            'keterangan' => $request->keterangan,
+            'cover' => $imgname,
+            'description' => $request->description,
+            'jumlah' => $request->jumlah,
+        ]);
 
         return redirect()->route('books.index')->with('success', 'Data updated successfully');
     }
+
+
 
 
     public function destroy($id)
@@ -142,21 +140,22 @@ class BooksController extends Controller
     }
 
 
-    public function barcode_pdf(){
+    public function barcode_pdf()
+    {
         $data = Book::all();
         return view('books.barcode_pdf', compact('data'));
     }
 
-    public function downloadPDF(){
-        
+    public function downloadPDF()
+    {
 
-    
+
+
 
         $mpdf = new Mpdf();
         $data = Book::all();
         // return view('pdf-generator.barcode-all', compact('data'));
         $mpdf->WriteHTML(view('pdf-generator.barcode-all', compact('data')));
         $mpdf->Output();
-
     }
 }

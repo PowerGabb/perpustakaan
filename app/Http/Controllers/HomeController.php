@@ -22,13 +22,11 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        
+
         // Mengambil data buku dengan kategori terkait, membatasi 4 item per halaman, dan mengurutkannya berdasarkan yang terbaru
-        $books = Book::with('categories')->latest()->paginate(4);
-        // $rented = Rent::where('status', 'dipinjam')
-        // ->orWhere('status', 'waiting')
-        // ->count();
-        $logo = WebSetting::first();    
+        $books = Book::paginate(4);
+        $logo = WebSetting::first();
+
         // Mengirimkan data ke view dengan menggunakan nama yang lebih deskriptif
         return view('public.index', compact('books', 'logo'));
     }
@@ -50,38 +48,39 @@ class HomeController extends Controller
     {
 
         $books = Book::count();
-        $categories = Categories::count();
         $rents = Rent::where('status', 'dipinjam')->count();
+        $dipinjam = Rent::where('status', 'returned')->count();
+        $kategori = Book::all()->pluck('kategori')->unique()->values()->count();
+        
+
 
         $data = Rent::with('book', 'user')->latest()->get();
-        return view('dashboard', compact('books', 'categories', 'rents', 'data'));
+        return view('dashboard', compact('books', 'rents', 'data', 'dipinjam', 'kategori'));
     }
 
     public function book($id)
     {
 
-        $book = Book::with('categories', 'noRak', 'author', 'publisher')->find($id);
+        $book = Book::find($id);
         return view('public.book-detail', compact('book'));
     }
 
     public function listBook(Request $request)
     {
-        $categories = Categories::all();
-        
-        $query = Book::with('categories', 'noRak', 'author', 'publisher');
+        $query = Book::query();  // Use query builder for flexibility
 
         if ($request->search) {
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        if ($request->category) {
-            $query->whereHas('categories', function($q) use ($request) {
-                $q->where('categories.id', $request->category); // Tambahkan alias tabel 'categories' di sini
-            });
+        if ($request->kategori) {
+            $query->where('kategori', 'like', '%' . $request->kategori . '%');
         }
 
-        $books = $query->paginate(4);
-
-        return view('public.list-book', compact('books', 'categories'));
+        $books = $query->get();
+        
+        $kategori = Book::all()->pluck('kategori')->unique()->values();
+      
+        return view('public.list-book', compact('books', 'kategori'));
     }
 }

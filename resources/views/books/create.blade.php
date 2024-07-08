@@ -27,45 +27,60 @@
 
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">Penulis Buku</label>
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">No Inventaris</label>
                         <div class="col-sm-10">
-                            <select name="author_id" id="" class="form-control">
-                                @foreach ($authors as $author)
-                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('author_id')
+                            <input type="text" class="form-control" id="basic-default-name" name="no_inventaris">
+                            @error('no_inventaris')
                                 <p class="text-danger pt-2">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">Penerbit Buku</label>
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Kode Buku</label>
                         <div class="col-sm-10">
-                            <select name="publisher_id" id="" class="form-control">
-                                @foreach ($publishers as $publisher)
-                                    <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('author_id')
+                            <input type="text" class="form-control" id="basic-default-name" id="book_code"
+                                name="book_code">
+                            @error('book_code')
                                 <p class="text-danger pt-2">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">Rak Buku</label>
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Pengarang</label>
                         <div class="col-sm-10">
-                            <select name="rak_id" id="" class="form-control">
-                                @foreach ($raks as $rak)
-                                    <option value="{{ $rak->id }}">{{ $rak->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('author_id')
+                            <input type="text" class="form-control" id="basic-default-name" name="pengarang">
+                            @error('pengarang')
                                 <p class="text-danger pt-2">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Penerbit</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="penerbit">
+                            @error('penerbit')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Kota Terbit</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="kota_terbit">
+                            @error('kota_terbit')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Edisi</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="edisi">
+                            @error('edisi')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">Diterbikan Pada</label>
                         <div class="col-sm-10">
@@ -75,22 +90,78 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">Category</label>
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Rak Buku</label>
                         <div class="col-sm-10">
-                            <select class="inputbox form-select" name="categories[]" multiple>
-                                @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                @endforeach
-                            </select>
-                            @error('categories')
+                            <input type="text" class="form-control" id="basic-default-name" name="rak">
+                            @error('rak')
                                 <p class="text-danger pt-2">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-
-
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Jumlah Halaman</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="basic-default-name" name="jumlah_halaman">
+                            @error('jumlah_halaman')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Tinggi Buku</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="basic-default-name" name="tinggi_buku">
+                            @error('tinggi_buku')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">ISBN</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="isbn">
+                            @error('isbn')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Kategori</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="kategori">
+                            @error('kategori')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Sumber</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="sumber">
+                            @error('sumber')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Harga</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="harga">
+                            @error('harga')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="basic-default-name">Keterangan</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-name" name="keterangan">
+                            @error('keterangan')
+                                <p class="text-danger pt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="basic-default-name">Stok Buku</label>
@@ -122,17 +193,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="basic-default-name">Kode Buku</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" id="book_code"
-                                name="book_code">
-                            @error('book_code')
-                                <p class="text-danger pt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                    </div>
+                    
 
                     <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
                 </form>

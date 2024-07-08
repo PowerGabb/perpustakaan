@@ -37,8 +37,9 @@
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{!! DNS1D::getBarcodeHTML($item->book_code, 'C128') !!}
+                                            <td><a href="/book/{{ $item->id }}">{{ $item->title }}</a></td>
+                                            
+                                            <td>{!! DNS1D::getBarcodeHTML($item->book_code, 'C39') !!}
                                                 p - {{ $item->book_code }}</td>
                                             <td rowspan="1" colspan="1">
                                                 @if ($item->cover)
@@ -49,7 +50,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $item->jumlah }}</td>
-                                            <td>{{ $item->noRak->name }}</td>
+                                            <td>{{ $item->rak }}</td>
                                             <td>{{ $item->created_at }}</td>
 
                                             <td>

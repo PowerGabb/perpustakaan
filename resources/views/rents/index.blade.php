@@ -32,7 +32,7 @@
                                 @forelse ($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->user->name }}</td>
+                                        <td><a href="/users/{{ $item->user->id }}">{{ $item->user->name }}</a></td>
                                         <td>{{ $item->book->title }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>{{ $item->rent_at }}</td>

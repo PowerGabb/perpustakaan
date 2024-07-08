@@ -45,13 +45,10 @@ Route::middleware(['auth', 'only-admin'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('categories', CategoriesController::class);
+    
     Route::resource('users', UsersController::class);
     Route::get('users-activation', [UsersController::class, 'activation'])->name('user.activation');
     Route::get('activation/{id}', [UsersController::class, 'activate']);
-    Route::resource('authors', AuthorsController::class);
-    Route::resource('raks', RaksController::class);
-    Route::resource('publishers', PublishersController::class);
     Route::resource('books', BooksController::class);
     Route::resource('denda', DendaController::class);
     Route::resource('website', WebController::class);

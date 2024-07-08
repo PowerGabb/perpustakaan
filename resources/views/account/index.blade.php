@@ -51,8 +51,13 @@
                                     <input class="form-control" type="text" id="email" name="email"
                                         value="{{ $profile->email }}" placeholder="john.doe@example.com" disabled />
                                 </div>
-
                                 <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input class="form-control" type="text" id="email" name="phone"
+                                        value="{{ $profile->phone }}" placeholder="john.doe@example.com" disabled />
+                                </div>
+
+                                <div class="mb-3 col-md-12">
                                     <label for="organization" class="form-label">Status</label>
                                     <input type="text" class="form-control" id="organization" name="role"
                                         value="{{ $profile->role }}" disabled />

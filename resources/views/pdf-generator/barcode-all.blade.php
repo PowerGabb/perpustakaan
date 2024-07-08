@@ -14,7 +14,7 @@
     <div class="row m-2">
         @foreach ($data as $item)
             <div class="col col-md-3 mb-4">
-                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($item->book_code, 'C128') }}" alt="image">
+                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($item->book_code, 'C39') }}" alt="image">
                 <p>{{ $item->title }}</p>
             </div>
         @endforeach

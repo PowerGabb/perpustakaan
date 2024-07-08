@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('web_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

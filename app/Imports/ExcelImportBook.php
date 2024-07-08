@@ -12,25 +12,38 @@ class ExcelImportBook implements ToModel, WithHeadingRow, WithValidation
 {
     public function model(array $row)
     {
+        $books = Book::updateOrCreate(
+            ['id' => $row['nomor_urut']],
+            [
+                'title' => $row['judul_buku'],
+                'no_inventaris' => $row['nomor_inventaris'],
+                'book_code' => $row['klasifikasi_buku'],
+                'pengarang' => $row['pengarang'],
+                'penerbit' => $row['penerbit'],
+                'kota_terbit' => $row['kota_terbit'],
+                'edisi' => $row['cetakan_atau_edisi'],
+                'publication_year' => $row['tahun_terbit'],
+                'rak' => $row['rak'],
+                'jumlah_halaman' => $row['jumlah_halaman'],
+                'tinggi_buku' => $row['tinggi_buku'],
+                'isbn' => $row['isbn'],
+                'kategori' => $row['kategori'],
+                'sumber' => $row['sumber'],
+                'harga' => $row['harga'],
+                'keterangan' => $row['keterangan'],
+                'jumlah' => $row['jumlah_buku'],
+            ]
+        );
 
-        // dd($row);
-        $data = new Book;
-
-        $data->title = $row['judul'];
-        $data->book_code = $row['kode_buku'];
-        $data->description = $row['description'];
-        $data->jumlah = $row['jumlah'];
-        // $data->author_id = $row['email'];
-        // $data->rak_id = $row['phone'];
-        // $data->publisher_id = $row['address'];
-        $data->save();
-        return $data;
+        return $books;
     }
 
     public function rules(): array
     {
+        
         return [
-            'jumlah' => 'required',
+          
         ];
     }
 }
+

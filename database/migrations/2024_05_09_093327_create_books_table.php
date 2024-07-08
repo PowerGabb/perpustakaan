@@ -16,19 +16,23 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->string('kategori')->nullable();
+            $table->string('no_inventaris')->nullable();
             $table->string('book_code', 255)->nullable();
             $table->string('slug')->nullable();
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-
-            $table->unsignedBigInteger('rak_id');
-            $table->foreign('rak_id')->references('id')->on('no_raks')->onDelete('cascade');
-
-            $table->unsignedBigInteger('publisher_id');
-            $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('cascade');
-
+            $table->string('pengarang')->nullable();
+            $table->string('penerbit')->nullable();
+            $table->string('kota_terbit')->nullable();
+            $table->string('edisi')->nullable();
+            $table->string('rak')->nullable();
             $table->date('publication_year')->nullable();
+            $table->string('jumlah_halaman')->nullable();
+            $table->string('tinggi_buku')->nullable();
+            $table->string('isbn')->nullable();
+            $table->string('sumber')->nullable();
+            $table->string('harga')->nullable();
+            $table->string('keterangan')->nullable();
             $table->integer('jumlah')->nullable();
             $table->string('cover')->nullable();
             $table->timestamps();

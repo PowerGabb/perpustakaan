@@ -29,10 +29,11 @@
                 @csrf
                 <div class="input-group mb-3">
                     
-                    <select class="form-select" name="category">
+                    <select class="form-select" name="kategori">
                         <option value="">Semua Kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                       
+                        @foreach ($kategori as $category)
+                            <option value="{{ $category }}">{{ $category }}</option>
                         @endforeach
                     </select>
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Cari</button>

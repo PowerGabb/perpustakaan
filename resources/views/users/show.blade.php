@@ -15,9 +15,14 @@
         <div class="card-body">
           <form id="formAccountSettings" method="POST" onsubmit="return false">
             <div class="row">
-              <div class="mb-3 col-md-6">
+              <div class="mb-3 col-md-12">
                 <label for="firstName" class="form-label">Nama Lengkap</label>
                 <input class="form-control" type="text" id="firstName" name="firstName"  placeholder="{{$user->name}}" readonly>
+              </div>
+
+              <div class="mb-3 col-md-6">
+                <label for="lastName" class="form-label">Phone</label>
+                <input class="form-control" type="text" name="lastName" id="lastName"  placeholder="{{$user->phone}}" readonly> 
               </div>
               <div class="mb-3 col-md-6">
                 <label for="lastName" class="form-label">Email</label>

@@ -31,7 +31,7 @@ class AccountController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'nisn' => 'required|max:10',
+            'nisn' => 'required|',
             'class' => 'required',
             'email' => 'required',
             'role' => 'required',

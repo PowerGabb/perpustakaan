@@ -19,9 +19,11 @@ return new class extends Migration
             $table->integer('nisn')->nullable();
             $table->string('class')->nullable();
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->string('role')->nullable()->default('menunggu aktivasi');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->text('address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

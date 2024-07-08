@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImportUser; // Sesuaikan dengan nama class import
 use App\Imports\ExcelImportBook; // Sesuaikan dengan nama class import
+use App\Models\Book;
 
 class ExcelController extends Controller
 {
@@ -22,6 +23,8 @@ class ExcelController extends Controller
                     Excel::import(new ExcelImportUser, $file);
 
                     // Berhasil import data
+                    
+                    
                     return redirect()->back()->with('success', 'Data Excel berhasil diimport!');
                 } catch (\Exception $e) {
                     // Gagal import data
@@ -40,15 +43,18 @@ class ExcelController extends Controller
     {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-  
             // Validasi file excel
             if ($file->isValid()) {
                 try {
+                    
 
-                    // Upload file excel
+                    
                     Excel::import(new ExcelImportBook, $file);
-
                     // Berhasil import data
+                    $data = Book::whereNull('title')->get();
+                    foreach ($data as $value) {
+                        $value->delete();
+                    }
                     return redirect()->back()->with('success', 'Data Excel berhasil diimport!');
                 } catch (\Exception $e) {
                     // Gagal import data
